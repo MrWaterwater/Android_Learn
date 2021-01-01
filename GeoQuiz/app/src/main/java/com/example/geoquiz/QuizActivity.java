@@ -29,7 +29,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-        mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
+        mQuestionTextView = findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +37,7 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
-        mTrueButton = (Button)findViewById(R.id.True_Button);
+        mTrueButton = findViewById(R.id.True_Button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +45,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mFalseButton = (Button)findViewById(R.id.False_Button);
+        mFalseButton = findViewById(R.id.False_Button);
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +64,10 @@ public class QuizActivity extends AppCompatActivity {
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex-1)%mQuestionBank.length;
+                if(mCurrentIndex == 0)
+                    mCurrentIndex = mQuestionBank.length-1;
+                else
+                    mCurrentIndex = (mCurrentIndex-1)%mQuestionBank.length;
                 updateQuestion();
             }
         });
